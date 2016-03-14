@@ -1,0 +1,50 @@
+body{
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Libre Baskerville', serif;
+    color: #fff;
+}
+
+.navbar{
+    background: #000;
+    width: 100%;
+    heigth: 100px;
+    color: #fff;
+    position: absolute;
+    z-index: 1000;
+    border-color: #000;
+}
+
+#logo img{
+    width: 35px;
+    height: 35px;
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover{
+    color: #9d9d9d;
+    text-decoration: none;
+}
+
+.container{
+    background-image: url(../images/wood_texture.jpg);
+    position:fixed;
+    z-index: 900;
+    width:90%;
+    height:100%;
+    margin: 0 auto;
+    margin-left: 75px;
+}
+
+.container *{
+    position: relative;
+    z-index: 1000;
+}

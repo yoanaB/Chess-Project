@@ -1,0 +1,13 @@
+{
+  "name": "chess",
+  "version": "1.0.0",
+  "description": "Chess game project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yoana Boyanova",
+  "license": "MIT",
+  "dependencies": {
+    "bower": "^1.7.7"
+  }
+}

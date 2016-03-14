@@ -1,0 +1,28 @@
+{
+  "name": "chess",
+  "description": "Chess game project",
+  "main": "",
+  "authors": [
+    "Yoana Boyanova"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chess"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6"
+  }
+}

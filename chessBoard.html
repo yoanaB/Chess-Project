@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <meta charset="UTF-8">
+        <title>Play Chess</title>
+        <link rel="stylesheet" href="css/chess-board.css"/>
+        <link rel="stylesheet" href="css/reset.css"/>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="javascript/Cell.js"></script>
+        <script src="javascript/Board.js"></script>
+        <script src="javascript/Figure.js"></script>
+        <script src="javascript/Pawn.js"></script>
+        <script src="javascript/Rook.js"></script>
+        <script src="javascript/Bishop.js"></script>
+        <script src="javascript/Queen.js"></script>
+        <script src="javascript/King.js"></script>
+        <script src="javascript/Knight.js"></script>
+        <script src="javascript/Play.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div id="logo-container">
+                <span id="logo">
+                     <img src="images/vector_logo_final.png" alt="logo"/>
+                </span>
+                <span id="moto"><a href="#">Log out</a></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container col-md-12 col-sm-12">
+    <div class="chess-game col-md-12">
+        <div id="chessBoxContainer col-md-8 col-sm-12">
+            <table id="flatChessboard">
+                <tbody>
+                <tr>
+                    <td class="boardAngle"></td>
+                    <th class="horizCoords">a</th>
+                    <th class="horizCoords">b</th>
+                    <th class="horizCoords">c</th>
+                    <th class="horizCoords">d</th>
+                    <th class="horizCoords">e</th>
+                    <th class="horizCoords">f</th>
+                    <th class="horizCoords">g</th>
+                    <th class="horizCoords">h</th>
+                    <td class="boardAngle"></td>
+                </tr>
+                <tr>
+                    <th class="vertCoords">8</th>
+                    <td class="whiteSquares cell" id="a8"></td>
+                    <td class="blackSquares cell" id="b8"></td>
+                    <td class="whiteSquares cell" id="c8"></td>
+                    <td class="blackSquares cell" id="d8"></td>
+                    <td class="whiteSquares cell" id="e8"></td>
+                    <td class="blackSquares cell" id="f8"></td>
+                    <td class="whiteSquares cell" id="g8"></td>
+                    <td class="blackSquares cell" id="h8"></td>
+                    <th class="vertCoords">8</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">7</th>
+                    <td class="blackSquares cell" id="a7"></td>
+                    <td class="whiteSquares cell" id="b7"></td>
+                    <td class="blackSquares cell" id="c7"></td>
+                    <td class="whiteSquares cell" id="d7"></td>
+                    <td class="blackSquares cell" id="e7"></td>
+                    <td class="whiteSquares cell" id="f7"></td>
+                    <td class="blackSquares cell" id="g7"></td>
+                    <td class="whiteSquares cell" id="h7"></td>
+                    <th class="vertCoords">7</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">6</th>
+                    <td class="whiteSquares cell" id="a6"></td>
+                    <td class="blackSquares cell" id="b6"></td>
+                    <td class="whiteSquares cell" id="c6"></td>
+                    <td class="blackSquares cell" id="d6"></td>
+                    <td class="whiteSquares cell" id="e6"></td>
+                    <td class="blackSquares cell" id="f6"></td>
+                    <td class="whiteSquares cell" id="g6"></td>
+                    <td class="blackSquares cell" id="6"></td>
+                    <th class="vertCoords">6</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">5</th>
+                    <td class="blackSquares cell" id="a5"></td>
+                    <td class="whiteSquares cell" id="b5"></td>
+                    <td class="blackSquares cell" id="c5"></td>
+                    <td class="whiteSquares cell" id="d5"></td>
+                    <td class="blackSquares cell" id="e5"></td>
+                    <td class="whiteSquares cell" id="f5"></td>
+                    <td class="blackSquares cell" id="g5"></td>
+                    <td class="whiteSquares cell" id="h5"></td>
+                    <th class="vertCoords">5</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">4</th>
+                    <td class="whiteSquares cell" id="a4"></td>
+                    <td class="blackSquares cell" id="b4"></td>
+                    <td class="whiteSquares cell" id="c4"></td>
+                    <td class="blackSquares cell" id="d4"></td>
+                    <td class="whiteSquares cell" id="e4"></td>
+                    <td class="blackSquares cell" id="f4"></td>
+                    <td class="whiteSquares cell" id="g4"></td>
+                    <td class="blackSquares cell" id="h4"></td>
+                    <th class="vertCoords">4</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">3</th>
+                    <td class="blackSquares cell" id="a3"></td>
+                    <td class="whiteSquares cell" id="b3"></td>
+                    <td class="blackSquares cell" id="c3"></td>
+                    <td class="whiteSquares cell" id="d3"></td>
+                    <td class="blackSquares cell" id="e3"></td>
+                    <td class="whiteSquares cell" id="f3"></td>
+                    <td class="blackSquares cell" id="g3"></td>
+                    <td class="whiteSquares cell" id="h3"></td>
+                    <th class="vertCoords">3</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">2</th>
+                    <td class="whiteSquares cell" id="a2"></td>
+                    <td class="blackSquares cell" id="b2"></td>
+                    <td class="whiteSquares cell" id="c2"></td>
+                    <td class="blackSquares cell" id="d2"></td>
+                    <td class="whiteSquares cell" id="e2"></td>
+                    <td class="blackSquares cell" id="f2"></td>
+                    <td class="whiteSquares cell" id="g2"></td>
+                    <td class="blackSquares cell" id="h2"></td>
+                    <th class="vertCoords">2</th>
+                </tr>
+                <tr>
+                    <th class="vertCoords">1</th>
+                    <td class="blackSquares cell" id="a1"></td>
+                    <td class="whiteSquares cell" id="b1"></td>
+                    <td class="blackSquares cell" id="c1"></td>
+                    <td class="whiteSquares cell" id="d1"></td>
+                    <td class="blackSquares cell" id="e1"></td>
+                    <td class="whiteSquares cell" id="f1"></td>
+                    <td class="blackSquares cell" id="g1"></td>
+                    <td class="whiteSquares cell" id="h1"></td>
+                    <th class="vertCoords">1</th>
+                </tr>
+                <tr>
+                    <td class="boardAngle"></td>
+                    <th class="horizCoords">a</th>
+                    <th class="horizCoords">b</th>
+                    <th class="horizCoords">c</th>
+                    <th class="horizCoords">d</th>
+                    <th class="horizCoords">e</th>
+                    <th class="horizCoords">f</th>
+                    <th class="horizCoords">g</th>
+                    <th class="horizCoords">h</th>
+                    <td class="boardAngle"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="play-ground col-md-4 col-sm-12" >
+            <div class="my-taken-figures">
+                <p>My taken figures</p>
+            </div>
+            <div class="opposite-taken-figures">
+                <p>Opposite taken figures</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+body{
+    background: url(../images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Libre Baskerville', serif;
+    color: #fff;
+}
+
+.navbar{
+    background: #000;
+    width: 100%;
+    heigth: 100px;
+    color: #fff;
+    position: absolute;
+    z-index: 1000;
+    border-color: #000;
+}
+
+#logo img{
+    width: 35px;
+    height: 35px;
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover{
+    color: rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.container{
+    background-image: url(../images/wood_texture.jpg);
+    position:fixed;
+    z-index: 900;
+    width:90%;
+    height:100%;
+    margin: 0 auto;
+    margin-left: 75px;
+
+}
+
+.chess-game{
+    top:100px;
+    position: relative;
+    width: 90%;
+
+}
+
+#flatChessboard{
+    width: 480px;
+    height: 480px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    font-size: 44px;
+    text-align: center;
+    color: black;
+    background: #fff;
+    top:100px;
+}
+
+#chessBoxContainer{
+    width: 500px;
+    height: 500px;
+    position: relative;
+    left: 50px;
+    top: 100px;
+    display: inline-block;
+    float: left;
+}
+
+.blackSquares{
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}
+
+.whiteSquares{
+    background-color: #fff;
+}
+
+td{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    /*vertical-align: text-bottom; */
+}
+
+td span{
+    display: block;
+    top: 5px;
+    bottom: 0;
+    cursor: pointer;
+    line-height: 52px;
+}
+
+.boardAngle,
+.horizCoords,
+.vertCoords{
+    background-color: #b33c00;
+    font-size: 0.75em;
+}
+
+.boardAngle,
+.horizCoords{
+    height: 40px;
+}
+
+.boardAngle,
+.vertCoords{
+    width: 40px;
+}
+
+.active::after {
+    background: rgba(146, 212, 144, 0.57);
+    content: "";
+    display: block;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.cell {
+    position: relative;
+}
+
+.play-ground{
+    display:inline-block;
+    float: right;
+    width: 40%;
+
+}
