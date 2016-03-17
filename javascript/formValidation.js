@@ -40,6 +40,7 @@
         //console.log(warning);
 
         $('#reg').submit(function (event) {
+            event.preventDefault();
             console.log(warnings);
 
             var serializedForm = $(this).serializeArray();
@@ -48,27 +49,26 @@
 
             if (!warning) {
                 $.ajax({
-                    url: 'api/register.php',
                     method: "POST",
                     data: serializedForm
                 }).done(function (response) {
                     console.log(response);
                 });
             }
+        });
+
+        $('#log-in-form').submit(function (event) {
             event.preventDefault();
-        })
 
-        $('.log-in-form').submit(function (event) {
+            var serializedForm = $(this).serializeArray();
 
+            console.log(serializedForm);
             $.ajax({
                 url: 'api/login.php',
                 method: 'POST',
-            }).done(function (response) {
-                var data = $.parseJSON(data);
-                if(data.status !== ''){
-                    alert(data.status);
-                }
-
+                data: serializedForm
+            }).done(function () {
+                window.location.href = 'profile.php';
             })
         })
     })

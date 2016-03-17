@@ -52,49 +52,76 @@ var Figure = (function () {
         throw new Error('You must implement move method!');
     }
 
+    Figure.prototype.makeMirrorMove = function (charCode) {
+        var oldPosition = charCode.split(' ')[0];
+        var newPosition = charCode.split(' ')[1];
+        var oldVerticalIndex = oldPosition.charAt(0);
+        var oldHorizontalIndex = oldPosition.charAt(1);
+        var newVerticalIndex = newPosition.charAt(0);
+        var newHorizontalIndex = newPosition.charAt(1);
+        var asciiCodeOfA = 'a'.charCodeAt(0);
+        var asciiCodeOfH = 'h'.charCodeAt(0);
+        var differenceBetweenOldVerticalIndex = oldVerticalIndex.charCodeAt(0) - asciiCodeOfA;
+        var differenceBetweenNewVerticalIndex = newVerticalIndex.charCodeAt(0) - asciiCodeOfA;
+        var mirrorMove = '';
+
+        oldVerticalIndex = String.fromCharCode(asciiCodeOfH - differenceBetweenOldVerticalIndex);
+        newVerticalIndex = String.fromCharCode(asciiCodeOfH - differenceBetweenNewVerticalIndex);
+
+        oldHorizontalIndex = 8 - oldHorizontalIndex + 1;
+        newHorizontalIndex = 8 - newHorizontalIndex + 1;
+
+        mirrorMove = oldVerticalIndex + oldHorizontalIndex + ' ' + newVerticalIndex + newHorizontalIndex;
+        return mirrorMove;
+    }
+
     Figure.prototype.move = function (board) {
+        var currentPosition = this.getCell().getCoordinates();
         var activeCells = this.getActiveCells();
         var self = this;
         var currentCell = self.getCell();
         for(var i = 0; i < activeCells.length; i++){
             (function (activeCell) {
                 $(activeCell.getDom()).on('click.moveFigure', function () {
+                    
                     //console.log('Clicked!');
                     if(activeCell.getFigure() != null){
-                        $(".my-taken-figures").append('span').html(activeCell.getFigure().getDom());
+                        $(".my-taken-figures").append(activeCell.getFigure().getDom());
                         activeCell.getDom().html(self.getDom());
                     }
+
                     activeCell.setFigure(self);
                     $(this).append(self.getDom());
                     self.setCell(activeCell);
                     self.setActiveCells([]);
                     currentCell.setFigure(null);
-                    console.log(self);
+                    //console.log(self);
                     $(currentCell.getDom()).html('');
                     for(var j = 0; j < activeCells.length; j++){
                         activeCells[j].notActive();
                         $(activeCells[j].getDom()).off('click.moveFigure');
                     }
+
+                    var moveCharcode = currentCell.getCoordinates() + ' ' + activeCell.getCoordinates();
+                    console.log('move: ' + moveCharcode);
+                    //send to server
+
+                    conn.send(self.makeMirrorMove(moveCharcode));
+
                 })
             })(activeCells[i])
         }
         if(activeCells.length > 0){
-            for(var i = 0; i < 8; i ++){
-                for(var j = 0; j < 8; j++){
-                    var currentCell = board.getCells()[i][j];
-                    (function (currentCell){
-                        if(!currentCell.getDom().hasClass('active')){
-                            $(currentCell.getDom()).on('click', function(){
-                                for(var k = 0; k < activeCells.length; k++){
-                                    $(activeCells[k].getDom()).removeClass('active');
-                                }
-                            })
-                        }
-                    }(currentCell))
-                }
-            }
-        }
+           $('#flatChessboard').on('click.notInActiveCell', function (event) {
+               if (!$(event.target).hasClass('active')) {
+                   $('.active').each(function () {
+                       $(this).removeClass('active').off('click.moveFigure');;
+                   })
+               }
 
+               activeCells = [];
+           });
+        }
     }
 
     return Figure;

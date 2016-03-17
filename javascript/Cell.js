@@ -7,13 +7,12 @@ var Cell = (function() {
         var _figure = null;
 
         var _isFigureOn = false;
-
         var _$dom = $dom;
 
         var _isActive = false;
 
         this.getCoordinates = function () {
-            return __coordinates;
+            return $($dom).attr('id');
         }
 
         this.setCoordinates = function (coordinates) {

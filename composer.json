@@ -1,0 +1,12 @@
+{
+    "name": "yoana/chess-project",
+    "require": {
+        "cboden/ratchet": "^0.3.4"
+    },
+    "authors": [
+        {
+            "name": "Yoana Boyanova",
+            "email": "yoana.boyanova95@gmail.com"
+        }
+    ]
+}

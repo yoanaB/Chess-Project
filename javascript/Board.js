@@ -52,16 +52,16 @@ var Board = (function () {
             Queen: '&#9819;'
         }
 
-        var arrayIndex = -1;
+        var arrayIndex = Math.round(Math.random());
 
-        $.ajax({
+        /*$.ajax({
             url: 'api/randomIndex.php',
             method: 'GET'
         }).done(function(data){
             arrayIndex = data;
         })
-
-        console.log(arrayIndex);
+*/
+       // console.log(arrayIndex);
 
         var figuresArray = [whites, blacks];
 
@@ -190,9 +190,9 @@ var Board = (function () {
 
                 (function (cell){
                     var cellDom = cell.getDom();
-                    $(cellDom).on('click.cell', function(){
-
+                    $(cellDom).on('click.cell', function(event){
                         if (cell.getFigure() && !cell.getFigure().getIsOpposite() ) {
+                            event.stopPropagation();
                             cell.getFigure().readyToMove(self);
                             cell.getFigure().move(self);
                         }
@@ -207,9 +207,28 @@ var Board = (function () {
 
     }
 
+    Board.prototype.updateFigurePosition = function(charCode){
+        var oldPosition = charCode.split(' ')[0];
+        var newPosition = charCode.split(' ')[1];
 
+        var oldCell = this.cellAt(oldPosition);
+        var newCell = this.cellAt(newPosition);
 
+        if (newCell.getFigure() != null && !newCell.getFigure().getIsOpposite()) {
+            $(newCell.getDom()).empty().append(oldCell.getFigure().getDom());
+            $('.opposite-taken-figures').append(newCell.getFigure().getDom().clone());
+            newCell.setFigure(oldCell.getFigure());
+            oldCell.setFigure(null);
+            $(oldCell.getDom()).empty();
 
+            //update figures status here
+        } else {
+            $(newCell.getDom()).append(oldCell.getFigure().getDom());
+            newCell.setFigure(oldCell.getFigure());
+            oldCell.setFigure(null);
+            $(oldCell.getDom()).empty();
+        }
+    }
 
     return new Board();
 

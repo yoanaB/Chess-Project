@@ -23,8 +23,12 @@ var Rook = (function (parent) {
         console.log(i);
         for(var i = parseInt(horizontal) - 1; i > 0; i--){
             console.log(vertical + i);
-            if(board.cellAt(vertical + i).getFigure() == null || board.cellAt(vertical + i).getFigure().getIsOpposite()){
+            if(board.cellAt(vertical + i).getFigure() == null /*|| board.cellAt(vertical + i).getFigure().getIsOpposite()*/){
                 activeCells.push(board.cellAt(vertical + i));
+            }
+            else if(board.cellAt(vertical + i).getFigure() !== null && board.cellAt(vertical + i).getFigure().getIsOpposite()){
+                activeCells.push(board.cellAt(vertical + i));
+                break;
             }
             else{
                 break;
@@ -33,9 +37,12 @@ var Rook = (function (parent) {
         for(var i = parseInt(horizontal) + 1; i <= 8; i++){
             console.log(vertical + (i));
             console.log(board.cellAt(vertical + (i)).getFigure());
-            if(board.cellAt(vertical + (i)).getFigure() == null || board.cellAt(vertical + (i)).getFigure().getIsOpposite()){
-                console.log('pushed');
+            if(board.cellAt(vertical + (i)).getFigure() == null /*|| board.cellAt(vertical + (i)).getFigure().getIsOpposite()*/){
                 activeCells.push(board.cellAt(vertical + i));
+            }
+            else if(board.cellAt(vertical + i).getFigure() !== null && board.cellAt(vertical + i).getFigure().getIsOpposite()){
+                activeCells.push(board.cellAt(vertical + i));
+                break;
             }
             else{
                 break;
@@ -44,8 +51,14 @@ var Rook = (function (parent) {
 
         for(var i = verticalIndex - 1; i >= asciiCodeOfA; i--){
             var currentVertical = String.fromCharCode(i);
-            if(board.cellAt(currentVertical + horizontal).getFigure() == null || board.cellAt(currentVertical + horizontal).getFigure().getIsOpposite()){
-                activeCells.push(board.cellAt(currentVertical + horizontal));
+            var currentCell = board.cellAt(currentVertical + horizontal);
+
+            if(currentCell.getFigure() == null ){
+                activeCells.push(currentCell);
+            }
+            else if(currentCell.getFigure() !== null &&(currentCell.getFigure().getIsOpposite())){
+                activeCells.push(currentCell);
+                break;
             }
             else{
                 break;
@@ -53,8 +66,13 @@ var Rook = (function (parent) {
         }
         for(var i = verticalIndex + 1; i <= asciiCodeOfH; i++){
             var currentVertical = String.fromCharCode(i);
-            if(board.cellAt(currentVertical + horizontal).getFigure() == null || board.cellAt(currentVertical + horizontal).getFigure().getIsOpposite()){
+            var currentCell = board.cellAt(currentVertical + horizontal);
+            if(currentCell.getFigure() == null ){
+                activeCells.push(currentCell);
+            }
+            else if(board.cellAt(currentVertical + horizontal).getFigure() !== null && board.cellAt(currentVertical + horizontal).getFigure().getIsOpposite()){
                 activeCells.push(board.cellAt(currentVertical + horizontal));
+                break;
             }
             else{
                 break;
@@ -64,6 +82,8 @@ var Rook = (function (parent) {
         for (var i = 0; i < activeCells.length; i++) {
             activeCells[i].active();
         }
+
+        this.setActiveCells(activeCells);
 
         return activeCells;
     }

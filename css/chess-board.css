@@ -30,7 +30,7 @@ a{
 }
 
 a:hover{
-    color: rgba(0, 0, 0, 0.2);
+    color: #9d9d9d;
     text-decoration: none;
 }
 
@@ -75,7 +75,7 @@ a:hover{
 }
 
 .blackSquares{
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #9d9d9d;
     z-index: 900;
 }
 
@@ -132,8 +132,8 @@ td span{
 }
 
 .play-ground{
-    display:inline-block;
-    float: right;
-    width: 40%;
+    position: absolute;
+    right: 20px;
+    top: 100px;
 
 }

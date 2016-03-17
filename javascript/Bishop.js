@@ -26,8 +26,12 @@ var Bishop = (function (parent) {
         for(var i = parseInt(horizontal) + 1, k = verticalIndex - 1; i <= 8 &&  k >= asciiCodeOfA; i++, k--){
             var currentCell = board.cellAt(String.fromCharCode(k) + (parseInt(i)));
             console.log(i);
-            if(currentCell.getFigure() === null || (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+            if(currentCell.getFigure() === null /*|| (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())*/){
                 activeCells.push(currentCell);
+            }
+            else if((currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+                activeCells.push(currentCell);
+                break;
             }
             else{
                 break;
@@ -36,8 +40,12 @@ var Bishop = (function (parent) {
 
         for(var i = parseInt(horizontal) + 1, k = verticalIndex + 1; i <= 8 &&  k <= asciiCodeOfH; i++, k ++){
             var currentCell = board.cellAt(String.fromCharCode(k) + i);
-            if(currentCell.getFigure() === null || (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+            if(currentCell.getFigure() === null /*|| (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())*/){
                 activeCells.push(currentCell);
+            }
+            else if((currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+                activeCells.push(currentCell);
+                break;
             }
             else{
                 break;
@@ -46,8 +54,12 @@ var Bishop = (function (parent) {
 
         for(var i = parseInt(horizontal) - 1, k = verticalIndex - 1; i >= 1 &&  k >= asciiCodeOfA; i--, k --){
             var currentCell = board.cellAt(String.fromCharCode(k) + i);
-            if(currentCell.getFigure() === null || (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+            if(currentCell.getFigure() === null /*|| (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())*/){
                 activeCells.push(currentCell);
+            }
+            else if((currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+                activeCells.push(currentCell);
+                break;
             }
             else{
                 break;
@@ -56,8 +68,12 @@ var Bishop = (function (parent) {
 
         for(var i = parseInt(horizontal) - 1, k = verticalIndex + 1; i >= 1 &&  k <= asciiCodeOfH; i--, k ++){
             var currentCell = board.cellAt(String.fromCharCode(k) + i);
-            if(currentCell.getFigure() === null || (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+            if(currentCell.getFigure() === null /*|| (currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())*/){
                 activeCells.push(currentCell);
+            }
+            else if((currentCell.getFigure() !== null && currentCell.getFigure().getIsOpposite())){
+                activeCells.push(currentCell);
+                break;
             }
             else{
                 break;

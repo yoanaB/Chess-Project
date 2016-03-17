@@ -2,47 +2,47 @@
 
 require('config.php');
 
-if(isset($_POST['username'])){
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+function isJson($string) {
+ json_decode($string);
+ return (json_last_error() == JSON_ERROR_NONE);
+}
+
+if(isJson(file_get_contents('php://input'))) {
+	$data = json_decode(file_get_contents('php://input'), true);
+} else {
+	$data = $_POST;
+}
+
+if(isset($data['username'])){
+	$username = $data['username'];
+	$password = $data['password'];
 	$password = md5($password);
-	$response_array = [];
-	//echo $username;
 	
-	if(isset($_COOKIE["name"]) && isset($_COOKIE[$password])){
+	if(isset($_SESSION["name"])){
 		$id = mysql_query("SELECT `id` FROM `users` WHERE `userName` = $userName");
-		mysql_query("INSERT INTO `logged_in_users` (`user_id`) VALUES ($id)");
-		session_start();
-		$name=$_SESSION['name'];     
-		echo'welcome :'. $name.'<br>';
-		echo'<a href="signout.php">Signout</a>';
-		header('location:../profile.html');
+		mysql_query("UPDATE `users` SET `is_logged_in` = 'true' WHERE `id` = $id");
+		http_response_code(200);
 	}
 	
 	if($username != '' && $password != ''){
 		$sql = mysql_query("SELECT * FROM `users` WHERE `userName` = '$username' AND `password` = '$password'") or die(mysql_error());
 		if(mysql_num_rows($sql) > 0){
-			$_SESSION['username']=$username;
-			$id = mysql_query("SELECT id FROM `users` WHERE `userName` = $userName");
-			mysql_query("INSERT INTO `logged_in_users` (`user_id`) VALUES ($id)");
+			$queryResponse = mysql_fetch_array(mysql_query("SELECT `id` FROM `users` WHERE `userName` = '$username'"));
+			$id = $queryResponse["id"];
+			mysql_query("UPDATE `users` SET `is_logged_in` = 'true' WHERE `id` = '$id'");
+
 			session_start();
-			$name=$_SESSION['name'];     
-			echo'welcome :'. $name.'<br>';
-			echo'<a href="signout.php">Signout</a>';
-			header('location:../profile.html');
-			//echo "you are now logged in";
+			$_SESSION["name"] = $username;
+
+			http_response_code(200);
 		}
 		else {
-			$response_array['status'] = 'The entered username or password is incorrect';
-			//echo'The entered username or password is incorrect';
+			http_response_code(403);
 		}
 	}
 	else {
-		$response_array['status'] = 'Enter both username and password';
-		//echo'Enter both username and password';
+		http_response_code(403);
 	}
-	header('Content-type: application/json');
-	echo json_encode($response_array);
+} else {
+	http_response_code(403);
 }
-
-?>
